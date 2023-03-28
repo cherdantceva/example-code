@@ -26,11 +26,11 @@ import {
 import { tableLocationsHeaderItems } from './tableLocationsData';
 
 type TableLocationsProps = {
-  addRow: boolean;
-  setAddRow: (b: boolean) => void;
+  isRowAdded: boolean;
+  setIsRowAdded: (b: boolean) => void;
 };
 
-export const TableLocations: FC<TableLocationsProps> = ({ addRow, setAddRow }) => {
+export const TableLocations: FC<TableLocationsProps> = ({ isRowAdded, setIsRowAdded }) => {
   const { data, loading, error } = useMyLocationsQuery();
   const [removeLocationMutation] = useLocationDeleteMutation();
   const locations = data?.myContractor?.locations?.edges || [];
@@ -69,7 +69,7 @@ export const TableLocations: FC<TableLocationsProps> = ({ addRow, setAddRow }) =
     });
   return (
     <_TableLocationsRoot>
-      {(locations.length > 0 || addRow) && (
+      {(locations.length > 0 || isRowAdded) && (
         <_TableLocationsHeader>
           <_TableHeaderRow>
             {tableLocationsHeaderItems.map((headerItem, key) => (
@@ -96,8 +96,8 @@ export const TableLocations: FC<TableLocationsProps> = ({ addRow, setAddRow }) =
           </_TableHeaderRow>
         </_TableLocationsHeader>
       )}
-      <_TableContainer isEmpty={locations?.length === 0 && !addRow}>
-        <_TableBody isEmpty={locations?.length === 0 && !addRow}>
+      <_TableContainer isEmpty={locations?.length === 0 && !isRowAdded}>
+        <_TableBody isEmpty={locations?.length === 0 && !isRowAdded}>
           {items?.map((location) => (
             <TableRow
               key={location?.node?.id}
@@ -107,7 +107,7 @@ export const TableLocations: FC<TableLocationsProps> = ({ addRow, setAddRow }) =
               onRemove={() => handleDelete(location?.node?.id || '')}
             />
           ))}
-          {addRow && <RowForm setIsEdit={setAddRow} />}
+          {isRowAdded && <RowForm setIsEdit={setIsRowAdded} />}
         </_TableBody>
       </_TableContainer>
     </_TableLocationsRoot>

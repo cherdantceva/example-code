@@ -7,20 +7,20 @@ import { _Button, _LocationsHeader, _LocationsRoot, _Title } from './styles';
 
 export const Locations: FC = () => {
   const { t } = useTranslation('common');
-  const [addRow, setAddRow] = useState(false);
+  const [isRowAdded, setIsRowAdded] = useState(false);
   return (
     <_LocationsRoot>
       <_LocationsHeader>
         <_Title>{t('storageManagement')}</_Title>
         <_Button
           onClick={() => {
-            setAddRow(true);
+            setIsRowAdded(true);
           }}
         >
           <_Title>{t('addLocation')}</_Title>
         </_Button>
       </_LocationsHeader>
-      <TableLocations addRow={addRow} setAddRow={setAddRow} />
+      <TableLocations isRowAdded={isRowAdded} setIsRowAdded={setIsRowAdded} />
     </_LocationsRoot>
   );
 };

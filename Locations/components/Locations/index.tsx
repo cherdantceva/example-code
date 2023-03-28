@@ -8,7 +8,7 @@ import { _Button, _LocationsHeader, _LocationsRoot, _Title } from './styles';
 
 export const Locations: FC = (_props: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const { t } = useTranslation('common');
-  const [addRow, setAddRow] = useState(false);
+  const [isRowAdded, setIsAddRow] = useState(false);
 
   return (
     <_LocationsRoot>
@@ -16,13 +16,13 @@ export const Locations: FC = (_props: InferGetServerSidePropsType<typeof getServ
         <_Title>{t('storageManagement')}</_Title>
         <_Button
           onClick={() => {
-            setAddRow(true);
+            setIsRowAdded(true);
           }}
         >
           {t('addLocation')}
         </_Button>
       </_LocationsHeader>
-      <TableLocations addRow={addRow} setAddRow={setAddRow} />
+      <TableLocations isRowAdded={isRowAdded} setIsRowAdded={setIsRowAdded} />
     </_LocationsRoot>
   );
 };

@@ -1,0 +1,60 @@
+query MyLocations {
+  myContractor {
+    id
+    locations(first: 100) {
+      edges {
+        cursor
+        node {
+          address
+          contactPerson
+          contactPhone
+          description
+          externalId
+          id
+          title
+          updatedAt
+          canBeDeleted
+        }
+      }
+    }
+  }
+}
+
+mutation LocationCreate($input: LocationCreateInput!) {
+  locationCreate(input: $input) {
+    location {
+      address
+      contactEmail
+      contactPerson
+      contactPhone
+      createdAt
+      description
+      externalId
+      id
+      title
+      updatedAt
+    }
+  }
+}
+
+mutation LocationDelete($input: LocationDeleteInput!) {
+  locationDelete(input: $input) {
+    deletedLocationId
+    operationId
+  }
+}
+
+mutation LocationUpdate($input: LocationUpdateInput!) {
+  locationUpdate(input: $input) {
+    location {
+      address
+      contactEmail
+      contactPerson
+      contactPhone
+      description
+      externalId
+      id
+      title
+    }
+  }
+}
